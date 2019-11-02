@@ -1,0 +1,100 @@
+.open_project {
+    display: grid;
+    height: 100vh;
+    width: 100vw;
+    grid-template: 200px calc(100% - 200px) / repeat(2, 1fr);
+}
+
+/* Top left part of the grid  
+_____________________________________________________*/
+.open_project .project_controller {
+    padding: 20px;
+    box-shadow: 3px 3px 10px 3px #ccc;
+}
+
+.open_project .project_controller .name {
+    font-size: 2rem;
+}
+
+.open_project .project_controller .description {
+    color: #ccc;
+    /* max-width: 100%; */
+    height: 30px;
+    overflow: hidden;
+}
+
+.open_project .project_controller .control_panel {
+    display: inline-block;
+    padding: 20px 0;
+}
+
+.open_project .project_controller .control_panel button{
+    margin-right: 10px;
+}
+
+/* Top right part of the grid 
+_____________________________________________________________________________________*/
+.open_project .task {
+
+}
+
+/* The bottom left part of the grid 
+______________________________________________________________________________________*/
+.open_project .task_list{
+    grid-area: 2 / 1 / 2 / 1;
+    padding: 10px;
+}
+
+.open_project .task_list .control_panel {
+    height: 50px;
+    padding: 7px;
+    display: flex;
+}
+/* The ul element in the task list */
+.open_project .task_list .tasks{
+    height: calc(100% - 50px);
+    padding: 10px;
+}
+
+/* Each task in the task list [TASK IN LIST] */
+.open_project .task_list .tasks .task {
+    border: 1px solid #ccc;
+    min-height: 100px;
+    padding: 0 5px;
+    list-style-type: none;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    position: relative;
+}
+.open_project .task_list .tasks .task .task_control-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 50px;
+    display: flex;
+    padding: 7px;
+    z-index: 3;
+}
+
+.open_project .task_list .tasks .task .task_control-panel button {margin-left: 5px}
+/* The bottom right part of the grid 
+_______________________________________________________________________________________*/
+.open_project .bubbles {
+    grid-area: 2 / 2 / 2 / 2;
+    border: 1px solid red;
+    /* For the draggable to work [position] */
+    position: relative;
+}
+
+.open_project .bubbles .bubble {
+    width: 100px ;
+    height: 100px;
+    background-color: lightskyblue;
+    border-radius: 100%;
+    position: absolute;
+}
+
+.open_project .bubbles .bubble .name {
+    position: relative;
+    top: 100px;
+}
