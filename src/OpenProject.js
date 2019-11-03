@@ -60,11 +60,13 @@ const Project = ({ match }) => {
                     due={project.due}
                     setDueDate = {setDueDate}/>
             </ProjectController>
+            {/* Top right part of the grid */}
             <section className="task">
 
             </section>
             {/* Bottom left part of the grid */}
             <TaskList {...TaskListProps}/>
+            {/* Bottom Right part of the grid */}
             <Bubbles {...TaskBubblesProps}/>
         </div>
     );

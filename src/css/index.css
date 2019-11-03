@@ -72,10 +72,11 @@ button {
 
 .popup .popup_control-panel {
   position: absolute;
-  bottom: 10px;
+  bottom: 0;
   left: 0;
   padding: 0;
   width: 100%;
+  padding: 10px 0;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -88,4 +89,49 @@ button {
   font-size: 3rem;
   cursor: pointer;
   color: white;
+}
+
+
+/* The Tags in the App */
+
+/* The list of tags */
+.popup .tags {
+  padding: 20px;
+  border: 1px solid black;
+  height: 645px;
+  overflow: auto;
+}
+
+/* Each tag in the list */
+.popup .tags .tag {
+  list-style-type: none;
+  border: 1px solid #ccc;
+  padding: 10px 0;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+/* RANGE SLIDER */
+
+
+/* The tool tip in the app */
+.tooltip {
+  background-color: #474747;
+  color: white;
+  width: 300px !important;
+  /* Position absolute in the inline style */
+  border-radius: 4px;
+  padding: 10px;
+  z-index: 99;
+  
+}
+
+.tooltip .arrow {
+  width: 20px;
+  height: 20px;
+  background-color: #474747;
+  transform: translate(-50%, 0) rotate(45deg);
+  position: absolute;
+  top: -10px;
+  left: 50%;
 }

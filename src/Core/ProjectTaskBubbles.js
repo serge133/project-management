@@ -17,8 +17,6 @@ const Bubbles = props => {
     const savePosition = (e, data, bubbleID) => {
         const x = data.x;
         const y = data.y;
-        console.log(data)
-        console.log(`x: ${x}, y: ${y}, bubbleID: ${bubbleID}`);
         const copyTasks = [...project.tasks];
         const bubbleIndex = copyTasks.findIndex( bubble => bubble.id === bubbleID);
         if(bubbleIndex < 0)return;

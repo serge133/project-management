@@ -2,7 +2,7 @@ import React, { useState, Fragment } from 'react';
 
 
 import Popup from './Popup';
-import { SwatchesPicker } from 'react-color';
+import Tags from '../Core/Tags';
 
 export const Wrapper = ({ children }) => {
     return (
@@ -15,34 +15,50 @@ export const Wrapper = ({ children }) => {
 export const ControlPanel = ({ addTask }) => {
     const [addTaskPopup, setAddTaskPopup] = useState({
         show: false,
+        
+        name: '',
+        // Size varies between two and three
+        importance: 2,
         //default color
-        color: 'gray'
+        tag: {name: 'Default', color: 'gray'}
     });
-    
-    const togglePopup = () => setAddTaskPopup({show: !addTaskPopup.show, color: 'gray'});
-
+    const [tagsPopup, setTagsPopup] = useState(false);
+    const toggleAddTaskPopup = () => setAddTaskPopup({...addTaskPopup,show: !addTaskPopup.show});
+    const toggleTagsPopup = () => setTagsPopup(!tagsPopup);
     const closePopupAndAddTask = () => {
-        togglePopup();
-        addTask(addTaskPopup.color);
+        toggleAddTaskPopup();
+        addTask(addTaskPopup.name, addTaskPopup.tag, addTaskPopup.importance);
     };
 
-    const AddTaskPopup = (
-        <Popup close={togglePopup}>
-            <input type="text" id="addTaskName" placeholder="Task Name"/>
-            <SwatchesPicker
-                onChangeComplete={color => setAddTaskPopup({show: true, color: color.hex})}
-                color={addTaskPopup.color}/>
-            <section className="popup_control-panel">
-                <button onClick={closePopupAndAddTask}>Submit</button>
-            </section>
-        </Popup>
-    )
-
+    const popups = () => {
+        if(addTaskPopup.show && !tagsPopup){
+            return (
+                <Popup close={toggleAddTaskPopup}>
+                    <input type="text" onChange={e => setAddTaskPopup({...addTaskPopup, name: e.target.value})} placeholder="Task Name" value={addTaskPopup.name}/>
+                    <div className="selected_tag" style={{border: `3px solid ${addTaskPopup.tag.color}`}}>
+                        {addTaskPopup.tag.name}
+                    </div>
+                    <button onClick={toggleTagsPopup}>Select Tag</button>
+                    <h2>Importance:</h2>
+                    <input type="range" min="1" max="3" value={addTaskPopup.importance} onChange={e => setAddTaskPopup({...addTaskPopup, importance: e.target.valueAsNumber})}/>
+                    <section className="popup_control-panel">
+                        <button onClick={closePopupAndAddTask}>Submit</button>
+                    </section>
+                </Popup>
+            );
+        } else if (addTaskPopup.show && tagsPopup) {
+            return <Tags 
+                        selectTag={tag => setAddTaskPopup({...addTaskPopup, tag: tag})} 
+                        toggleTagsPopup={toggleTagsPopup}
+                        selectedTag={addTaskPopup.tag}/>
+        } else return null;
+    };
+    
     return (
         <Fragment>
-            {addTaskPopup.show ? AddTaskPopup : null}
+            {popups()}
             <div className="control_panel">
-                <button onClick={togglePopup}>New Task</button>
+                <button onClick={toggleAddTaskPopup}>New Task</button>
             </div>
         </Fragment>
     )
@@ -55,30 +71,47 @@ export const Tasks = ({ tasks, deleteTask, editTask }) => {
         task: {
             id: '',
             name: '',
-            color: ''
+            importance: 2,
+            tag: {name: '', color: ''}
         }
     });
 
+    const [tagsPopup, setTagsPopup] = useState(false);
+
+    // Sets the task when opening edit popup
     const openEditPopup = task => setEditTaskPopup({show: true, task: task});
     const closeEditPopup = () => setEditTaskPopup({...editTaskPopup, show: false});
+    const toggleTagsPopup = () => setTagsPopup(!tagsPopup);
     const closePopupAndEditTask = () => {
         closeEditPopup()
         editTask(editTaskPopup.task);
     };
 
-    const setEditColor = color => setEditTaskPopup({...editTaskPopup, task: {...editTaskPopup.task, color: color.hex}})
-    const EditTaskPopup = (
-        <Popup close={closeEditPopup}>
-            <h1>Task</h1>
-            <input type="text" id="editTaskName" defaultValue={editTaskPopup.task.name}/>
-            <SwatchesPicker 
-                onChangeComplete={setEditColor}
-                color={editTaskPopup.task.color}/>
-            <section className="popup_control-panel">
-                <button onClick={closePopupAndEditTask}>Submit</button>
-            </section>
-        </Popup>
-    );
+    const popups = () => {
+        if(editTaskPopup.show && !tagsPopup){
+            return (
+                <Popup close={closeEditPopup}>
+                    <h1>Task</h1>
+                    <input type="text" onChange={e => setEditTaskPopup({...editTaskPopup, task: {...editTaskPopup.task, name: e.target.value}})} value={editTaskPopup.task.name}/>
+                    <div className="selected_tag" style={{border: `3px solid ${editTaskPopup.task.tag.color}`}}>
+                        {editTaskPopup.task.tag.name}
+                    </div>
+                    <button onClick={toggleTagsPopup}>Select Tag</button>
+                    <h2>Importance</h2>
+                    <input type = "range" value ={editTaskPopup.task.importance} min="1" max="3" onChange={e => setEditTaskPopup({show: true, task: {...editTaskPopup.task, importance: e.target.valueAsNumber}})}/>
+                    <section className="popup_control-panel">
+                        <button onClick={closePopupAndEditTask}>Submit</button>
+                    </section>
+                </Popup>
+            )
+        } else if (editTaskPopup.show && tagsPopup){
+            return <Tags 
+                        selectTag={tag => setEditTaskPopup({...editTaskPopup, task: {...editTaskPopup.task, tag: tag}})}
+                        selectedTag={editTaskPopup.task.tag}
+                        toggleTagsPopup={toggleTagsPopup}/>
+        } else return null;
+    }
+
 
     const TaskControlPanel = ({ task }) => {
         return (
@@ -91,10 +124,11 @@ export const Tasks = ({ tasks, deleteTask, editTask }) => {
     
     return (
         <ul className="tasks">
-            {editTaskPopup.show ? EditTaskPopup : null}
+            {popups()}
             {tasks.map( task => (
-                <li key={task.id} className="task" style={{border: `1px solid ${task.color}`}}>
+                <li key={task.id} className="task" style={{border: `1px solid ${task.tag.color}`}}>
                     <h1 className="name">{task.name.substring(0, 60)} {task.name.length > 60 ? '...': null}</h1>
+                    <h6>{task.tag.name}</h6>
                     <TaskControlPanel task={task}/>
                 </li>
             ))}

@@ -77,6 +77,11 @@ ________________________________________________________________________________
 }
 
 .open_project .task_list .tasks .task .task_control-panel button {margin-left: 5px}
+
+.open_project .popup .selected_tag {
+    width: 90%;
+    margin: 10px auto;
+}
 /* The bottom right part of the grid 
 _______________________________________________________________________________________*/
 .open_project .bubbles {
@@ -92,9 +97,11 @@ ________________________________________________________________________________
     background-color: lightskyblue;
     border-radius: 100%;
     position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .open_project .bubbles .bubble .name {
-    position: relative;
-    top: 100px;
+    /* background-color: black; */
 }

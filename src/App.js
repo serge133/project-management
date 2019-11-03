@@ -9,10 +9,18 @@ import { URL } from './Config/Database';
 import axios from 'axios';
 
 import Popup from './Components/Popup';
+import Tags from './Core/Tags';
+import {
+  MenuBar,
+  MenuButton
+} from './Components/AppMenuBar';
 
 const App = () => {
   const [projects, setProjects] = useState([]);
-  const [popup, setPopup] = useState(false);
+  const [popup, setPopup] = useState({
+    newProject: false,
+    tags: false
+  });
   // GET request to database
   useEffect(() => {
     axios.get(URL + '/projects.json').then( response => {
@@ -43,10 +51,10 @@ const App = () => {
     axios.put(URL + `/projects/${project.id}.json`, project);
   }
 
-  const togglePopup = () => setPopup(!popup);
-
-  const addNewProjectPopup = (
-    <Popup toggle = {togglePopup}>
+  const toggleNewProjectPopup = () => setPopup({tags: false, newProject: !popup.newProject});
+  const toggleTagsPopup = () => setPopup({newProject: false, tags: !popup.tags});
+  const newProjectPopup = (
+    <Popup close = {toggleNewProjectPopup}>
         <input type="text" id="addProjectName" placeholder="Project Name"/>
           <textarea id="addProjectDesription"/>
           <section className="popup_control-panel">
@@ -56,10 +64,8 @@ const App = () => {
   )
 
 
-
-
-
-
+  const [selectedTag, setSelectedTag] = useState({name: '', color: ''});
+  
   const ProjectProps = {
     projects: projects,
     setProjects: setProjects
@@ -67,8 +73,13 @@ const App = () => {
 
   return (
     <div className="App">
-      {popup ? addNewProjectPopup : null}
-      <button onClick={togglePopup}>New</button>
+      {/* Popups */}
+      {popup.newProject ? newProjectPopup : null}
+      {popup.tags ? <Tags toggleTagsPopup={toggleTagsPopup} selectTag={tag => setSelectedTag(tag)} selectedTag={selectedTag}/> : null}
+      <MenuBar>
+          <MenuButton control={toggleNewProjectPopup}>New</MenuButton>
+          <MenuButton control={toggleTagsPopup}>Tags</MenuButton>
+      </MenuBar>
       <div className="projects">
         {projects.map( p => <Project 
                               project={p} 

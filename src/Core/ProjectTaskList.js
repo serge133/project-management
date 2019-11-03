@@ -15,16 +15,15 @@ const TaskList = props => {
     } = props;
 
 
-
-    const addTask = color => {
-        const taskName = document.getElementById('addTaskName').value;
+    const addTask = (name, tag, importance) => {
         const task = {
             id: nanoid(),
-            name: taskName,
+            name: name,
             // X and Y for bubble
             x: 0,
             y: 0,
-            color: color,
+            importance: importance,
+            tag: tag,
             finished: false
         }
         const newTasks = project.tasks.concat([task]);
@@ -42,16 +41,15 @@ const TaskList = props => {
     };
 
     const editTask = task => {
-        const taskID = task.id;
         const copyTasks = [...project.tasks];
+        const taskID = task.id;
         const taskIndex = copyTasks.findIndex( task => task.id === taskID);
         if(taskIndex < 0)return;
         // The editing on values in the task
-        const newTaskName = document.getElementById('editTaskName').value;
-        const newTaskColor = task.color;
         const currentEditTask = copyTasks[taskIndex];
-        currentEditTask.name = newTaskName;
-        currentEditTask.color = newTaskColor;
+        currentEditTask.name = task.name;
+        currentEditTask.tag = task.tag;
+        currentEditTask.importance = task.importance
         setProject({...project, tasks: copyTasks});
         axios.put( URL + `/projects/${project.id}/tasks.json`, copyTasks);
     };
