@@ -33,13 +33,32 @@
     background-color: white;
     margin: 20px 0 0 20px;
     border-radius: 7px;
-    box-shadow: 5px 5px 7px 7px lightgray;
-    padding: 10px;
+    border: 1px solid #ccc;
+    /* padding: 10px; */
     position: relative;
+    text-align: center;
+}
+
+.projects .project .name {
+
+}
+
+.projects .project .description {
+    color: #ccc;
+    display: none;
+}
+
+.projects .project .number_tasks {
+    border: 1px solid #ccc;
+    margin: 30px;
+    border-radius: 7px;
 }
 
 .projects .project .timer {
     font-size: 2rem;
+    border: 1px solid #ccc;
+    margin: 30px;
+    border-radius: 7px;
 }
 
 .projects .project .control_panel {

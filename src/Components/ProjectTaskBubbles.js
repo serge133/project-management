@@ -13,11 +13,21 @@ export const Wrapper = ({ children }) => {
 
 export const Bubbles = ({ bubbles, savePosition }) => {
     
-
+// A BUBBLE IS A TASK JUST SAYING!!!
     const Bubble = ({ bubble }) => {
-        const {name, tag, importance, id, x, y} = bubble;
-        const bubbleSize = importance * 100;
+        const {name, tag, importance, id, x, y, finished, highlight} = bubble;
         const [showTooltip, setShowTooltip] = useState(false);
+
+        const bubbleDiameter = importance * 50;
+
+
+        const bubbleStyle = {
+            backgroundColor: tag.color, 
+            width: bubbleDiameter,
+            height: bubbleDiameter,
+            opacity: finished ? 0.3 : 1,
+            border: highlight ? '5px solid #5f5ff0' : null
+        }
         return (
             <Draggable
                 bounds="parent"
@@ -25,10 +35,10 @@ export const Bubbles = ({ bubbles, savePosition }) => {
                 defaultPosition={{x: 0, y: 0}}
                 position={{x: x, y: y}}>
                 <div className="bubble" 
-                    style={{backgroundColor: tag.color, width: bubbleSize, height: bubbleSize}}
+                    style={bubbleStyle}
                     onMouseOver={() => setShowTooltip(true)}
                     onMouseLeave={() => setShowTooltip(false)}>
-                    <Tooltip show={showTooltip} top={bubbleSize} left={null}>
+                    <Tooltip show={showTooltip} top={bubbleDiameter} left={null}>
                         {name}
                     </Tooltip>
                 </div>

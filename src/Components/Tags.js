@@ -22,7 +22,7 @@ export const TagsList = ({ tags, selectTag, selectedTag }) => {
         const { name, color} = tag
         return (
             <li className="tag" 
-                style = {selectedTag.color === tag.color ? {border: `3px solid ${color}`, backgroundColor: 'lightgrey'} : {border: `3px solid ${color}`}} onClick={() => selectTag(tag)}>
+                style = {selectedTag.color === tag.color ? {borderLeft: `5px solid ${color}`, backgroundColor: 'lightgrey'} : {borderLeft: `5px solid ${color}`}} onClick={() => selectTag(tag)}>
                 {name}
             </li>
         )

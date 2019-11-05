@@ -49,7 +49,7 @@ const App = () => {
     setProjects(projects.concat([project]));
     setPopup(false);
     axios.put(URL + `/projects/${project.id}.json`, project);
-  }
+  };
 
   const toggleNewProjectPopup = () => setPopup({tags: false, newProject: !popup.newProject});
   const toggleTagsPopup = () => setPopup({newProject: false, tags: !popup.tags});
@@ -61,8 +61,7 @@ const App = () => {
             <button onClick={addProject}>Submit</button>
           </section>
     </Popup>
-  )
-
+  );
 
   const [selectedTag, setSelectedTag] = useState({name: '', color: ''});
   
@@ -71,9 +70,10 @@ const App = () => {
     setProjects: setProjects
   }
 
+
+
   return (
     <div className="App">
-      {/* Popups */}
       {popup.newProject ? newProjectPopup : null}
       {popup.tags ? <Tags toggleTagsPopup={toggleTagsPopup} selectTag={tag => setSelectedTag(tag)} selectedTag={selectedTag}/> : null}
       <MenuBar>

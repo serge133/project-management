@@ -4,17 +4,19 @@ import Popup from './Popup';
 import Calendar from 'react-calendar';
 
 
-export const Controller = ({ project, children }) => {
+export const Controller = ({ project, changeProjectName, children }) => {
     const { name, description, due} = project;
 
+    /**
+     * TODO: make the due fit in with the timer
+     */
     return (
         <section className="project_controller">
-                <h1 className="name">{name}</h1>
-                <h2 className="description">{description.substring(0, 100)}</h2>
+            <input className="name" defaultValue={ name } onChange={ changeProjectName }/>
+            <h6 className="due">{ new Date(due).toDateString() }</h6>
                 { children }
-                <Timer due={due}/>
         </section>
-    )
+    );
 };
 
 export const ControlPanel = ({ due, setDueDate }) => {
@@ -30,16 +32,14 @@ export const ControlPanel = ({ due, setDueDate }) => {
                 <button onClick={toggleCalendarPopup}>Submit</button>
             </section>
         </Popup>
-    )
+    );
     
     return (
         <Fragment>
             {calendarPopup ? CalendarPopup: null }
-        <div className="control_panel">
-            
-            <button onClick={toggleCalendarPopup}>{ new Date(due).toDateString() }</button>
-            
-        </div>
+            <div onClick={toggleCalendarPopup}>
+                <Timer due={due} onClick={toggleCalendarPopup}/>
+            </div>
         </Fragment>
         
     )

@@ -15,6 +15,9 @@ import TaskList from './Core/ProjectTaskList';
 // Project Task Bubbles
 import Bubbles from './Core/ProjectTaskBubbles';
 
+// !Work in progress
+import TaskSearch from './Core/TaskSearch';
+
 const Project = ({ match }) => {
     const { projectID } = match.params;
 
@@ -33,6 +36,7 @@ const Project = ({ match }) => {
             // Config
             if(!fetchedProject)return;
             if(!fetchedProject.tasks)fetchedProject.tasks = [];
+            fetchedProject.tasks.forEach(task => task.highlight = false);
             setProject(fetchedProject);
         });
     }, [projectID]);
@@ -43,27 +47,30 @@ const Project = ({ match }) => {
         axios.patch(URL + `/projects/${project.id}.json`, {due: parseDate});
     };
 
+    const changeProjectName = e => axios.patch(URL + `/projects/${project.id}.json`, {name: e.target.value});
+
     const TaskListProps = {
         project: project,
         setProject: setProject
-    }
+    };
 
     const TaskBubblesProps = {
         project: project,
         setProject: setProject
-    }
+    };
+
+    
+
     return (
         <div className="open_project">
             {/* Top left part of the grid */}
-            <ProjectController project={project}>
+            <ProjectController project={project} changeProjectName={changeProjectName}>
                 <ControlPanel 
                     due={project.due}
                     setDueDate = {setDueDate}/>
             </ProjectController>
             {/* Top right part of the grid */}
-            <section className="task">
-
-            </section>
+            <TaskSearch project={project} setProject={setProject}/>
             {/* Bottom left part of the grid */}
             <TaskList {...TaskListProps}/>
             {/* Bottom Right part of the grid */}

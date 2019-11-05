@@ -24,7 +24,8 @@ const TaskList = props => {
             y: 0,
             importance: importance,
             tag: tag,
-            finished: false
+            finished: false,
+            highlight: false
         }
         const newTasks = project.tasks.concat([task]);
         setProject({...project, tasks: project.tasks.concat([task])});
@@ -54,13 +55,24 @@ const TaskList = props => {
         axios.put( URL + `/projects/${project.id}/tasks.json`, copyTasks);
     };
 
+    const finishTask = taskID => {
+        const copyTasks = [...project.tasks];
+        const taskIndex = copyTasks.findIndex( task => task.id === taskID);
+        if(taskIndex < 0)return;
+        const toggle = !copyTasks[taskIndex].finished;
+        copyTasks[taskIndex].finished = toggle;
+        setProject({...project, tasks: copyTasks});
+        axios.put(URL + `/projects/${project.id}/tasks.json`, copyTasks);
+    }
+
     return (
         <Wrapper>
             <ControlPanel addTask={addTask}/>
             <Tasks 
                 tasks={project.tasks}
                 deleteTask={deleteTask}
-                editTask={editTask}/>
+                editTask={editTask}
+                finishTask={finishTask}/>
         </Wrapper>
     );
 };

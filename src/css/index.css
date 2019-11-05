@@ -12,7 +12,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
-  color: #474747;
+  color: #ccc;
+  background-color: #353442;
 }
 
 code {
@@ -27,6 +28,11 @@ button {
   color: white;
   border-radius: 4px;
   cursor: pointer;
+}
+
+input {
+  background-color: #353442;
+  color: #ccc;
 }
 
 .react-calendar button {color: #474747;}
@@ -45,7 +51,7 @@ button {
   transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
-  background-color: white;
+  background-color: #353442;
   width: 500px;
   height: 700px;
   text-align: center;
@@ -97,7 +103,6 @@ button {
 /* The list of tags */
 .popup .tags {
   padding: 20px;
-  border: 1px solid black;
   height: 645px;
   overflow: auto;
 }
@@ -120,7 +125,7 @@ button {
   color: white;
   width: 300px !important;
   /* Position absolute in the inline style */
-  border-radius: 4px;
+  border-radius: 7px;
   padding: 10px;
   z-index: 99;
   

@@ -2,20 +2,62 @@
     display: grid;
     height: 100vh;
     width: 100vw;
-    grid-template: 200px calc(100% - 200px) / repeat(2, 1fr);
+    grid-template: 50px calc(100% - 50px) / 1fr 2fr;
 }
 
-/* Top left part of the grid  
-_____________________________________________________*/
+/* ?Top left part of the grid */
 .open_project .project_controller {
-    padding: 20px;
-    box-shadow: 3px 3px 10px 3px #ccc;
+    grid-area: 1 / 1 / 1 / 1;
+    position: relative;
 }
 
 .open_project .project_controller .name {
-    font-size: 2rem;
+    position: absolute;
+    transform: translate(0, -50%);
+    top: 50%;
+    left: 10px;
+    grid-area: 1 / 2 / 1 / 2;
+    font-size: 1.75rem;
+    color: #5f5ff0;
+    border: 1px solid #ccc;
+    width: calc(50% - 15px);
+    height: 45px;
+    padding-left: 10px;
+    /* text-align: center; */
+    border-radius: 7px;
+    overflow: hidden;
+    font-weight: 100;
+    /* cursor: pointer; */
 }
 
+
+/* The date the project is due */
+.open_project .project_controller .due {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    color: #ccc;
+}
+
+.open_project .project_controller .timer {
+    position: absolute;
+    transform: translate(0, -50%);
+    top: 50%;
+    right: 10px;
+    grid-area: 1 / 2 / 1 / 2;
+    font-size: 1.75rem;
+    font-weight: 100;
+    color: #5f5ff0;
+    border: 1px solid #ccc;
+    width: calc(50% - 15px);
+    padding-left: 10px;
+    height: 45px;
+    border-radius: 7px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+/* Not present */
 .open_project .project_controller .description {
     color: #ccc;
     /* max-width: 100%; */
@@ -23,23 +65,47 @@ _____________________________________________________*/
     overflow: hidden;
 }
 
-.open_project .project_controller .control_panel {
-    display: inline-block;
-    padding: 20px 0;
+
+
+/*? Top right part of the grid */
+.open_project .task_search {
+    width: 300px;
 }
 
-.open_project .project_controller .control_panel button{
-    margin-right: 10px;
+.open_project .task_search input {
+    height: 45px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    margin-top: 2.5px;
+    padding: 0 10px;
+    outline: none;
 }
 
-/* Top right part of the grid 
-_____________________________________________________________________________________*/
-.open_project .task {
-
+.open_project .task_search .search_results {
+    border-radius: 7px;
+    position: absolute;
+    z-index: 999;
+    background-color: white;
 }
 
-/* The bottom left part of the grid 
-______________________________________________________________________________________*/
+.open_project .task_search .search_results li {
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    list-style-type: none;
+    color: #5f5ff0;
+    height: 50px;
+    width: 300px;
+    z-index: 500;
+    cursor: pointer;
+    border-radius: 7px;
+}
+
+.open_project .task_search .search_results li:hover {
+    background-color: lightgray;
+}
+
+/*? The bottom left part of the grid */
 .open_project .task_list{
     grid-area: 2 / 1 / 2 / 1;
     padding: 10px;
@@ -54,19 +120,32 @@ ________________________________________________________________________________
 .open_project .task_list .tasks{
     height: calc(100% - 50px);
     padding: 10px;
+    overflow: auto;
 }
 
 /* Each task in the task list [TASK IN LIST] */
 .open_project .task_list .tasks .task {
+    transition-duration: 1s;
     border: 1px solid #ccc;
-    min-height: 100px;
+    height: 100px;
     padding: 0 5px;
     list-style-type: none;
     margin-bottom: 10px;
     border-radius: 4px;
     position: relative;
 }
-.open_project .task_list .tasks .task .task_control-panel {
+
+.open_project .task_list .tasks .expand_task {
+    transition-duration: 1s;
+    border: 1px solid #ccc;
+    height: 300px;
+    padding: 0 5px;
+    list-style-type: none;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    position: relative;
+}
+.open_project .task_list .tasks .task_control-panel {
     position: absolute;
     top: 0;
     right: 0;
@@ -76,17 +155,18 @@ ________________________________________________________________________________
     z-index: 3;
 }
 
-.open_project .task_list .tasks .task .task_control-panel button {margin-left: 5px}
+.open_project .task_list .tasks .task_control-panel button {margin-left: 5px}
 
 .open_project .popup .selected_tag {
-    width: 90%;
+    width: 200px;
+    height: 30px;
+    border-radius: 4px;
     margin: 10px auto;
+    cursor: pointer;
 }
-/* The bottom right part of the grid 
-_______________________________________________________________________________________*/
+/*? The bottom right part of the grid */
 .open_project .bubbles {
     grid-area: 2 / 2 / 2 / 2;
-    border: 1px solid red;
     /* For the draggable to work [position] */
     position: relative;
 }
@@ -94,14 +174,10 @@ ________________________________________________________________________________
 .open_project .bubbles .bubble {
     width: 100px ;
     height: 100px;
-    background-color: lightskyblue;
     border-radius: 100%;
     position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.open_project .bubbles .bubble .name {
-    /* background-color: black; */
+    /* box-shadow: 3px 3px 10px 3px #ccc; */
 }
