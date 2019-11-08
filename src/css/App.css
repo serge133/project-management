@@ -1,74 +1,72 @@
 .App .menu_bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #ccc;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
 }
 .App .app_name {
-    border-right: 1px solid #ccc;
-    height: 70px;
-    padding: 0 10px;
-    line-height: 70px;
+  border-right: 1px solid #ccc;
+  height: 70px;
+  padding: 0 10px;
+  line-height: 70px;
 }
 .App .menu_bar button {
-    margin-left: 20px;
+  margin-left: 20px;
 }
 
 /* Projects in the App */
 .projects {
-    margin-top: 70px;
-    height: calc(100vh - 70px);
-    display: flex;
-    flex-wrap: wrap;
-    overflow: auto;
+  margin-top: 70px;
+  height: calc(100vh - 70px);
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
 }
 
 .projects .project {
-    width: 300px;
-    height: 300px;
-    background-color: white;
-    margin: 20px 0 0 20px;
-    border-radius: 7px;
-    border: 1px solid #ccc;
-    /* padding: 10px; */
-    position: relative;
-    text-align: center;
+  width: 300px;
+  height: 300px;
+  background-color: white;
+  margin: 20px 0 0 20px;
+  border-radius: 7px;
+  border: 1px solid #ccc;
+  /* padding: 10px; */
+  position: relative;
+  text-align: center;
 }
 
 .projects .project .name {
-
 }
 
 .projects .project .description {
-    color: #ccc;
-    display: none;
+  color: #ccc;
+  display: none;
 }
 
 .projects .project .number_tasks {
-    border: 1px solid #ccc;
-    margin: 30px;
-    border-radius: 7px;
+  border: 1px solid #ccc;
+  margin: 30px;
+  border-radius: 7px;
 }
 
 .projects .project .timer {
-    font-size: 2rem;
-    border: 1px solid #ccc;
-    margin: 30px;
-    border-radius: 7px;
+  font-size: 2rem;
+  border: 1px solid #ccc;
+  margin: 30px;
+  border-radius: 7px;
 }
 
 .projects .project .control_panel {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 50px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
-

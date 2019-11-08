@@ -1,8 +1,7 @@
-import React from 'react';
+import React from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 //// const initial = [{id: 'fasdfasd', content: 'test'}, {id: 'dafdsf', content: 'another test'}]
-
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
@@ -16,34 +15,36 @@ const Item = ({ item, index }) => {
   const itemColorStyle = {
     width: 15,
     height: 15,
-    borderRadius: '100%',
+    borderRadius: "100%",
     border: `3px solid ${item.tag.color}`,
     backgroundColor: item.finished ? item.tag.color : null,
-    position: 'absolute',
-    right: 5,
-
-  }
+    position: "absolute",
+    right: 5
+  };
 
   return (
     <Draggable draggableId={item.id} index={index}>
       {provided => (
         <div
-            className="sortable_list-item"
-            ref={provided.innerRef}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-            // ? Style is very slow
+          className="sortable_list-item"
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          // ? Style is very slow
         >
-            <div style={itemColorStyle}/>
-            <h2 style={item.highlight ? {color: '#7a7af0'} : {color: 'white'}}>{item.name}</h2>
-            <br/>
-            <h3>{item.tag.name}</h3>
-            
+          <div style={itemColorStyle} />
+          <h2
+            style={item.highlight ? { color: "#7a7af0" } : { color: "white" }}
+          >
+            {item.name}
+          </h2>
+          <br />
+          <h3>{item.tag.name}</h3>
         </div>
       )}
     </Draggable>
   );
-}
+};
 
 const List = React.memo(function List({ items }) {
   return items.map((item, index) => (
@@ -51,14 +52,9 @@ const List = React.memo(function List({ items }) {
   ));
 });
 
-
 const Sortable = props => {
-
-// * Children is list
-  const {
-    children,
-    setList
-  } = props;
+  // * Children is list
+  const { children, setList } = props;
 
   function onDragEnd(result) {
     if (!result.destination) {
@@ -76,14 +72,18 @@ const Sortable = props => {
     );
 
     // setState({ items });
-    setList(items)
+    setList(items);
   }
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="list">
         {provided => (
-          <div ref={provided.innerRef} {...provided.droppableProps} className="sortable_list">
+          <div
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            className="sortable_list"
+          >
             <List items={children} />
             {provided.placeholder}
           </div>
@@ -91,6 +91,6 @@ const Sortable = props => {
       </Droppable>
     </DragDropContext>
   );
-}
+};
 
 export default Sortable;

@@ -1,220 +1,219 @@
 .open_project {
-    display: grid;
-    height: 100vh;
-    width: 100vw;
-    grid-template: 50px calc(100% - 50px) / 1fr 2fr;
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+  grid-template: 50px calc(100% - 50px) / 1fr 2fr;
 }
 
 /* ?Top left part of the grid */
 .open_project .project_controller {
-    grid-area: 1 / 1 / 1 / 1;
-    position: relative;
+  grid-area: 1 / 1 / 1 / 1;
+  position: relative;
 }
 
 .open_project .project_controller .name {
-    position: absolute;
-    transform: translate(0, -50%);
-    top: 50%;
-    left: 10px;
-    grid-area: 1 / 2 / 1 / 2;
-    font-size: 1.75rem;
-    color: #7a7af0;
-    border: none;
-    width: calc(50% - 15px);
-    height: 45px;
-    padding-left: 10px;
-    overflow: hidden;
-    font-weight: 100;
-    outline: none;
+  position: absolute;
+  transform: translate(0, -50%);
+  top: 50%;
+  left: 10px;
+  grid-area: 1 / 2 / 1 / 2;
+  font-size: 1.75rem;
+  color: #7a7af0;
+  border: none;
+  width: calc(50% - 15px);
+  height: 45px;
+  padding-left: 10px;
+  overflow: hidden;
+  font-weight: 100;
+  outline: none;
 }
 
 .open_project .project_controller .name:focus {
-    border-bottom: 1px solid #7a7af0;
+  border-bottom: 1px solid #7a7af0;
 }
 
-
 .open_project .project_controller .timer {
-    position: absolute;
-    transform: translate(0, -50%);
-    top: 50%;
-    right: 10px;
-    grid-area: 1 / 2 / 1 / 2;
-    font-size: 1.75rem;
-    font-weight: 100;
-    color: #7a7af0;
-    width: calc(50% - 15px);
-    padding-left: 10px;
-    height: 45px;
-    cursor: pointer;
-    overflow: hidden;
+  position: absolute;
+  transform: translate(0, -50%);
+  top: 50%;
+  right: 10px;
+  grid-area: 1 / 2 / 1 / 2;
+  font-size: 1.75rem;
+  font-weight: 100;
+  color: #7a7af0;
+  width: calc(50% - 15px);
+  padding-left: 10px;
+  height: 45px;
+  cursor: pointer;
+  overflow: hidden;
 }
 
 /* The date the project is due */
 .open_project .project_controller .due {
-    position: absolute;
-    top: 5px;
-    right: 20px;
-    color: #7a7af0;
+  position: absolute;
+  top: 5px;
+  right: 20px;
+  color: #7a7af0;
 }
 
 /* Not present */
 .open_project .project_controller .description {
-    color: #ccc;
-    /* max-width: 100%; */
-    height: 30px;
-    overflow: hidden;
+  color: #ccc;
+  /* max-width: 100%; */
+  height: 30px;
+  overflow: hidden;
 }
-
-
 
 /*? Top right part of the grid */
 .open_project .top_right {
-    grid-area: 1 / 2 / 1 / 2;
+  grid-area: 1 / 2 / 1 / 2;
 }
 
 .open_project .top_right .task_search {
-    width: 300px;
-    position: relative;
+  width: 300px;
+  position: relative;
 }
 
 .open_project .task_search input {
-    height: 45px;
-    width: 100%;
-    /* border: 1px solid #ccc; */
-    border: none;
-    
-    /* border-radius: 7px; */
-    margin-top: 2.5px;
-    padding: 0 10px;
-    outline: none;
+  height: 45px;
+  width: 100%;
+  /* border: 1px solid #ccc; */
+  border: none;
+
+  /* border-radius: 7px; */
+  margin-top: 2.5px;
+  padding: 0 10px;
+  outline: none;
 }
 
 .open_project .task_search input:focus {
-    border-bottom: 1px solid #7a7af0;
+  border-bottom: 1px solid #7a7af0;
 }
 
 .open_project .task_search .search_icon {
-    width: 15px;
-    transform: translate(0, -50%);
-    top: 50%;
-    right: 10px;
-    position: absolute;
+  width: 15px;
+  transform: translate(0, -50%);
+  top: 50%;
+  right: 10px;
+  position: absolute;
 }
 
 .open_project .search_results {
-    /* border-radius: 7px; */
-    position: absolute;
-    z-index: 999;
-    background-color: #474747;
+  /* border-radius: 7px; */
+  position: absolute;
+  z-index: 999;
+  background-color: #474747;
 }
 
 .open_project .search_results li {
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    list-style-type: none;
-    color: #ccc;
-    height: 50px;
-    width: 300px;
-    z-index: 500;
-    cursor: pointer;
-    border-radius: 7px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  list-style-type: none;
+  color: #ccc;
+  height: 50px;
+  width: 300px;
+  z-index: 500;
+  cursor: pointer;
+  border-radius: 7px;
 }
 
 .open_project .search_results li:hover {
-    background-color: #7a7af0;
+  background-color: #7a7af0;
 }
 
 /*? The bottom left part of the grid */
-.open_project .task_list{
-    grid-area: 2 / 1 / 2 / 1;
-    padding: 10px;
+.open_project .task_list {
+  grid-area: 2 / 1 / 2 / 1;
+  padding: 10px;
 }
 
 .open_project .task_list .control_panel {
-    height: 50px;
-    padding: 7px;
-    display: flex;
-    align-items: center;
-    position: relative;
+  height: 50px;
+  padding: 7px;
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 /* The toggle for edit mode */
 .open_project .task_list .control_panel .switch {
-    position: absolute;
-    right: 10px;
+  position: absolute;
+  right: 10px;
 }
 /* The ul element in the task list */
-.open_project .task_list .tasks{
-    height: calc(100% - 50px);
-    padding: 10px;
-    overflow: auto;
+.open_project .task_list .tasks {
+  height: calc(100% - 50px);
+  padding: 10px;
+  overflow: auto;
 }
 
 .open_project .sortable_list {
-    grid-area: 2 / 1 / 2 / 1;
-    padding: 10px;
-    height: calc(100% - 50px);
+  grid-area: 2 / 1 / 2 / 1;
+  padding: 10px;
+  height: calc(100% - 50px);
 }
 
 .open_project .sortable_list-item {
-    position: relative;
+  position: relative;
 }
 /* Each task in the task list [TASK IN LIST] */
 .open_project .task_list .tasks .task {
-    transition-duration: 1s;
-    background-color:#474747;
-    height: 100px;
-    padding: 0 5px;
-    list-style-type: none;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    position: relative;
+  transition-duration: 1s;
+  background-color: #474747;
+  height: 100px;
+  padding: 0 5px;
+  list-style-type: none;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  position: relative;
 }
 
 .open_project .task_list .tasks .expand_task {
-    transition-duration: 1s;
-    background-color:#474747;
-    height: 300px;
-    padding: 0 5px;
-    list-style-type: none;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    position: relative;
+  transition-duration: 1s;
+  background-color: #474747;
+  height: 300px;
+  padding: 0 5px;
+  list-style-type: none;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  position: relative;
 }
 
 .open_project .task_list .tasks .task_control-panel {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 50px;
-    display: flex;
-    padding: 7px;
-    z-index: 3;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 50px;
+  display: flex;
+  padding: 7px;
+  z-index: 3;
 }
 
-.open_project .task_list .tasks .task_control-panel button {margin-left: 5px}
+.open_project .task_list .tasks .task_control-panel button {
+  margin-left: 5px;
+}
 
 .open_project .popup .selected_tag {
-    width: 200px;
-    height: 30px;
-    border-radius: 4px;
-    margin: 10px auto;
-    cursor: pointer;
+  width: 200px;
+  height: 30px;
+  border-radius: 4px;
+  margin: 10px auto;
+  cursor: pointer;
 }
 /*? The bottom right part of the grid */
 .open_project .bubbles {
-    grid-area: 2 / 2 / 2 / 2;
-    /* For the draggable to work [position] */
-    position: relative;
+  grid-area: 2 / 2 / 2 / 2;
+  /* For the draggable to work [position] */
+  position: relative;
 }
 
 .open_project .bubbles .bubble {
-    width: 100px ;
-    height: 100px;
-    border-radius: 100%;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* box-shadow: 3px 3px 10px 3px #ccc; */
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* box-shadow: 3px 3px 10px 3px #ccc; */
 }
