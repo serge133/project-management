@@ -1,14 +1,22 @@
 import React from 'react';
+import searchSVG from '../assets/search.svg';
 
 export const Wrapper = ({ children }) => {
     return (
-        <section className="task_search">
+        <section className="top_right">
             { children }
         </section>
     )
 }
 
-export const SearchBar = ({ filterTasks }) => <input type = "text" placeholder="Search for any task..." onChange={filterTasks}/>;
+export const SearchBar = ({ filterTasks }) => {
+ return (
+     <section className="task_search">
+        <input type = "text" placeholder="Search for any task..." onChange={filterTasks}/>
+        <img alt="search" src = {searchSVG} className="search_icon"/>
+     </section>
+ );
+}
 
 
 export const SearchResults = ({ tasks, selectTask }) => {

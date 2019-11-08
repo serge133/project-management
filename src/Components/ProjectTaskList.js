@@ -12,7 +12,7 @@ export const Wrapper = ({ children }) => {
     );
 };
 
-export const ControlPanel = ({ addTask }) => {
+export const ControlPanel = ({ addTask, toggleEditMode }) => {
     const [addTaskPopup, setAddTaskPopup] = useState({
         show: false,
         
@@ -58,13 +58,16 @@ export const ControlPanel = ({ addTask }) => {
             {popups()}
             <div className="control_panel">
                 <button onClick={toggleAddTaskPopup}>New Task</button>
+                <label className="switch">
+                    <input type="checkbox" onChange={toggleEditMode}/>
+                    <span></span>
+                </label>
             </div>
         </Fragment>
     )
 }
 
-export const Tasks = ({ tasks, deleteTask, editTask, finishTask }) => {
-    // <POPUP>
+export const Tasks = ({ tasks, taskActions }) => {
     // Editing requires a todo to be stored
     const [editTaskPopup, setEditTaskPopup] = useState({
         show: false,
@@ -84,7 +87,7 @@ export const Tasks = ({ tasks, deleteTask, editTask, finishTask }) => {
     const toggleTagsPopup = () => setTagsPopup(!tagsPopup);
     const closePopupAndEditTask = () => {
         closeEditPopup()
-        editTask(editTaskPopup.task);
+        taskActions.edit(editTaskPopup.task);
     };
 
     const popups = () => {
@@ -110,9 +113,9 @@ export const Tasks = ({ tasks, deleteTask, editTask, finishTask }) => {
                         toggleTagsPopup={toggleTagsPopup}/>
         } else return null;
     }
-    // </POPUP>
-
+    // ! In Development [ Sortable List ]
     const Task = ({ task }) => {
+ 
         const {id, name, finished, highlight, tag} = task;
         const [expand, setExpand] = useState(false);
         
@@ -121,10 +124,10 @@ export const Tasks = ({ tasks, deleteTask, editTask, finishTask }) => {
         const TaskControlPanel = () => {
             return (
                 <section className="task_control-panel">
-                    <button onClick={() => deleteTask(id)}>Delete</button>
+                    <button onClick={() => taskActions.delete(id)}>Delete</button>
                     <button onClick={() => openEditPopup(task)}>Edit</button>
                     <button onClick={toggleExpand}>{ expand ? "Close" : "Open"}</button>
-                    <button style={{backgroundColor: 'green'}} onClick={() => finishTask(id)}>{ finished ? "Finished" : "Finish"}</button>
+                    <button style={{backgroundColor: 'green'}} onClick={() => taskActions.finish(id)}>{ finished ? "Finished" : "Finish"}</button>
                 </section>
             );
         };
@@ -138,17 +141,20 @@ export const Tasks = ({ tasks, deleteTask, editTask, finishTask }) => {
             borderLeft: `7px solid ${tag.color}`
         }
         const truncateName = name.length > 60 ? name.substring(0, 60) + '...': name;
+        // ! In Development
+        const sortableProps = {
+            setList: null
+        }
+
         return (
         <li key={id} className={expand ? "expand_task" : "task"} style={taskStyle}>
-                    <h1 className="name" style={taskNameStyle}>{truncateName}</h1>
-                    <h6 >{tag.name}</h6>
-                    <TaskControlPanel/>
+            <h1 className="name" style={taskNameStyle}>{truncateName}</h1>
+            <h6 >{tag.name}</h6>
+            <TaskControlPanel/>
         </li>
         );
     }
 
-    
-    
     return (
         <ul className="tasks">
             {popups()}

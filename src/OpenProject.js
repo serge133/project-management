@@ -15,10 +15,13 @@ import TaskList from './Core/ProjectTaskList';
 // Project Task Bubbles
 import Bubbles from './Core/ProjectTaskBubbles';
 
-// !Work in progress
 import TaskSearch from './Core/TaskSearch';
 
+
+
 const Project = ({ match }) => {
+
+    // * Initializer
     const { projectID } = match.params;
 
     const [project, setProject] = useState({
@@ -27,7 +30,8 @@ const Project = ({ match }) => {
         description: '',
         // default date
         due: new Date(),
-        tasks: []
+        tasks: [],
+        editMode: false
     });
 
     useEffect(() => {
@@ -36,11 +40,16 @@ const Project = ({ match }) => {
             // Config
             if(!fetchedProject)return;
             if(!fetchedProject.tasks)fetchedProject.tasks = [];
-            fetchedProject.tasks.forEach(task => task.highlight = false);
+            fetchedProject.editMode = false;
+            fetchedProject.tasks.forEach(task => {
+                task.highlight = false
+            });
             setProject(fetchedProject);
         });
     }, [projectID]);
 
+
+    // * Actions
     const setDueDate = date => {
         const parseDate = date.toString()
         setProject({...project, due: parseDate});
@@ -49,6 +58,7 @@ const Project = ({ match }) => {
 
     const changeProjectName = e => axios.patch(URL + `/projects/${project.id}.json`, {name: e.target.value});
 
+    // * Props
     const TaskListProps = {
         project: project,
         setProject: setProject
@@ -58,8 +68,6 @@ const Project = ({ match }) => {
         project: project,
         setProject: setProject
     };
-
-    
 
     return (
         <div className="open_project">

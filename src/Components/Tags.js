@@ -16,18 +16,21 @@ export const Wrapper = ({ children, toggleTagsPopup, toggleAddTag, addTagModeSta
     )
 }
 
+// * Toggle between the two
 export const TagsList = ({ tags, selectTag, selectedTag }) => {
 
+    // * Each individual Tag
     const Tag = ({ tag }) => {
         const { name, color} = tag
         return (
             <li className="tag" 
-                style = {selectedTag.color === tag.color ? {borderLeft: `5px solid ${color}`, backgroundColor: 'lightgrey'} : {borderLeft: `5px solid ${color}`}} onClick={() => selectTag(tag)}>
+                style = {selectedTag.color === tag.color ? {borderLeft: `5px solid ${color}`, backgroundColor: '#474747'} : {borderLeft: `5px solid ${color}`}} onClick={() => selectTag(tag)}>
                 {name}
             </li>
         )
     }
 
+    // * Tag List
     return (
         <ul className="tags">
             {tags.map( (tag, index) => <Tag key={index} tag={tag}/>)}

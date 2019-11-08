@@ -18,26 +18,20 @@
     left: 10px;
     grid-area: 1 / 2 / 1 / 2;
     font-size: 1.75rem;
-    color: #5f5ff0;
-    border: 1px solid #ccc;
+    color: #7a7af0;
+    border: none;
     width: calc(50% - 15px);
     height: 45px;
     padding-left: 10px;
-    /* text-align: center; */
-    border-radius: 7px;
     overflow: hidden;
     font-weight: 100;
-    /* cursor: pointer; */
+    outline: none;
 }
 
-
-/* The date the project is due */
-.open_project .project_controller .due {
-    position: absolute;
-    top: 5px;
-    right: 20px;
-    color: #ccc;
+.open_project .project_controller .name:focus {
+    border-bottom: 1px solid #7a7af0;
 }
+
 
 .open_project .project_controller .timer {
     position: absolute;
@@ -47,14 +41,20 @@
     grid-area: 1 / 2 / 1 / 2;
     font-size: 1.75rem;
     font-weight: 100;
-    color: #5f5ff0;
-    border: 1px solid #ccc;
+    color: #7a7af0;
     width: calc(50% - 15px);
     padding-left: 10px;
     height: 45px;
-    border-radius: 7px;
     cursor: pointer;
     overflow: hidden;
+}
+
+/* The date the project is due */
+.open_project .project_controller .due {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    color: #7a7af0;
 }
 
 /* Not present */
@@ -68,32 +68,51 @@
 
 
 /*? Top right part of the grid */
-.open_project .task_search {
+.open_project .top_right {
+    grid-area: 1 / 2 / 1 / 2;
+}
+
+.open_project .top_right .task_search {
     width: 300px;
+    position: relative;
 }
 
 .open_project .task_search input {
     height: 45px;
     width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 7px;
+    /* border: 1px solid #ccc; */
+    border: none;
+    
+    /* border-radius: 7px; */
     margin-top: 2.5px;
     padding: 0 10px;
     outline: none;
 }
 
-.open_project .task_search .search_results {
-    border-radius: 7px;
-    position: absolute;
-    z-index: 999;
-    background-color: white;
+.open_project .task_search input:focus {
+    border-bottom: 1px solid #7a7af0;
 }
 
-.open_project .task_search .search_results li {
+.open_project .task_search .search_icon {
+    width: 15px;
+    transform: translate(0, -50%);
+    top: 50%;
+    right: 10px;
+    position: absolute;
+}
+
+.open_project .search_results {
+    /* border-radius: 7px; */
+    position: absolute;
+    z-index: 999;
+    background-color: #474747;
+}
+
+.open_project .search_results li {
     margin-top: 10px;
     border: 1px solid #ccc;
     list-style-type: none;
-    color: #5f5ff0;
+    color: #ccc;
     height: 50px;
     width: 300px;
     z-index: 500;
@@ -101,8 +120,8 @@
     border-radius: 7px;
 }
 
-.open_project .task_search .search_results li:hover {
-    background-color: lightgray;
+.open_project .search_results li:hover {
+    background-color: #7a7af0;
 }
 
 /*? The bottom left part of the grid */
@@ -115,6 +134,14 @@
     height: 50px;
     padding: 7px;
     display: flex;
+    align-items: center;
+    position: relative;
+}
+
+/* The toggle for edit mode */
+.open_project .task_list .control_panel .switch {
+    position: absolute;
+    right: 10px;
 }
 /* The ul element in the task list */
 .open_project .task_list .tasks{
@@ -123,10 +150,19 @@
     overflow: auto;
 }
 
+.open_project .sortable_list {
+    grid-area: 2 / 1 / 2 / 1;
+    padding: 10px;
+    height: calc(100% - 50px);
+}
+
+.open_project .sortable_list-item {
+    position: relative;
+}
 /* Each task in the task list [TASK IN LIST] */
 .open_project .task_list .tasks .task {
     transition-duration: 1s;
-    border: 1px solid #ccc;
+    background-color:#474747;
     height: 100px;
     padding: 0 5px;
     list-style-type: none;
@@ -137,7 +173,7 @@
 
 .open_project .task_list .tasks .expand_task {
     transition-duration: 1s;
-    border: 1px solid #ccc;
+    background-color:#474747;
     height: 300px;
     padding: 0 5px;
     list-style-type: none;
@@ -145,6 +181,7 @@
     border-radius: 4px;
     position: relative;
 }
+
 .open_project .task_list .tasks .task_control-panel {
     position: absolute;
     top: 0;

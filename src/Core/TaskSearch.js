@@ -6,8 +6,9 @@ SearchBar,
 SearchResults
 } from '../Components/TaskSearch';
 
-// !Work in progress
+
 const TaskSearch = props => {
+    // * Given
     const {
     project,
     setProject
@@ -15,6 +16,7 @@ const TaskSearch = props => {
 
     const [filteredTasks, setFilteredTasks] = useState([]);
 
+    // * Actions
     const clearHighlightsAndFilter = () => {
         const copyTasks = [...project.tasks];
         copyTasks.forEach(task => task.highlight = false);

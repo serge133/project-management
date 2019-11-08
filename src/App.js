@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './css/App.css';
 import nanoid from 'nanoid';
-
-// Containers
-import Project from './Core/Project';
-
 import { URL } from './Config/Database';
 import axios from 'axios';
-
+import Project from './Core/Project';
 import Popup from './Components/Popup';
 import Tags from './Core/Tags';
 import {
@@ -21,7 +17,7 @@ const App = () => {
     newProject: false,
     tags: false
   });
-  // GET request to database
+  // * GET request to database
   useEffect(() => {
     axios.get(URL + '/projects.json').then( response => {
       if(response.data){
@@ -36,6 +32,7 @@ const App = () => {
     });
   }, []);
 
+  // * Adds Project
   const addProject = () => {
     const projectName = document.getElementById('addProjectName').value;
     const projectDesription = document.getElementById('addProjectDesription').value;
@@ -51,6 +48,7 @@ const App = () => {
     axios.put(URL + `/projects/${project.id}.json`, project);
   };
 
+  // * Popups
   const toggleNewProjectPopup = () => setPopup({tags: false, newProject: !popup.newProject});
   const toggleTagsPopup = () => setPopup({newProject: false, tags: !popup.tags});
   const newProjectPopup = (
@@ -65,13 +63,13 @@ const App = () => {
 
   const [selectedTag, setSelectedTag] = useState({name: '', color: ''});
   
+  // * Props
   const ProjectProps = {
     projects: projects,
     setProjects: setProjects
   }
-
-
-
+  
+  // * Render
   return (
     <div className="App">
       {popup.newProject ? newProjectPopup : null}
@@ -81,7 +79,7 @@ const App = () => {
           <MenuButton control={toggleTagsPopup}>Tags</MenuButton>
       </MenuBar>
       <div className="projects">
-        {projects.map( p => <Project 
+        {projects.map( p => <Project
                               project={p} 
                               key={p.id}
                               {...ProjectProps}/>)}

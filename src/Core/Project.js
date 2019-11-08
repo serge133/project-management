@@ -11,10 +11,10 @@ const Project = props => {
     const {
         project,
         projects,
-        setProjects
+        setProjects,
     } = props;
 
-
+    // * Actions
     const deleteProject = () => {
         const copyProjects = [...projects];
         const projectIndex = copyProjects.findIndex( p=> p.id === project.id);
@@ -22,10 +22,10 @@ const Project = props => {
         copyProjects.splice(projectIndex, 1);
         setProjects(copyProjects);
         axios.delete(URL + `/projects/${project.id}.json`);
-    }
+    };
 
     return (
-        <Wrapper project = {project}>
+        <Wrapper project = {project} >
             <Timer due={project.due}/>
             <ControlPanel
                 deleteProject={deleteProject}

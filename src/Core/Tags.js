@@ -14,7 +14,7 @@ const Tags = props => {
 
     const [addTagMode, setAddTagMode] = useState(false);
 
-    // Call to database to fetch tags
+    // * Call to database to fetch tags
     useEffect(() => {
         axios.get(URL + '/config/tags.json').then( response => {
             const fetchedTags = response.data;
